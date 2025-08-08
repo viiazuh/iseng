@@ -23,6 +23,7 @@
         max-width: 800px;
         text-align: center;
         color: white;
+        position: relative;
     }
     p {
         opacity: 0;
@@ -50,10 +51,11 @@
     button:hover {
         background: #e02682;
     }
-    #playAudioBtn {
-        display: inline-block;
-        margin-top: 20px;
-        background: #3b82f6;
+    .credit {
+        margin-top: 25px;
+        font-size: 14px;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.7);
     }
 </style>
 </head>
@@ -68,11 +70,11 @@
 
     <button id="nextBtn">Selanjutnya</button>
 
-    <audio id="audio" loop muted autoplay>
-        <source src="https://namasitus.netlify.app/Iqbaal%20Ramadhan%20-%20Rindu%20Sendiri%20(Lirik%20Video)%20[lFXlQiS_Mjg].mp3" type="audio/mpeg" />
+    <audio id="audio" loop>
+        <source src="https://raw.githubusercontent.com/viiazuh/iseng/main/Iqbaal%20Ramadhan%20-%20Rindu%20Sendiri%20(Lirik%20Video)%20%5BlFXlQiS_Mjg%5D.mp3" type="audio/mpeg">
     </audio>
 
-    <button id="playAudioBtn">Mainkan Lagu</button>
+    <div class="credit">by Azuzu</div>
 </div>
 
 <script>
@@ -86,6 +88,14 @@
     let index = 0;
     const container = document.getElementById("paragraf-container");
     const btn = document.getElementById("nextBtn");
+    const audio = document.getElementById('audio');
+
+    // Minta user untuk berinteraksi sebelum memutar audio
+    document.body.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+        }
+    }, { once: true });
 
     btn.addEventListener("click", () => {
         if (index < teks.length) {
@@ -102,18 +112,6 @@
             container.innerHTML = `<p class="show">${container.querySelector('p').textContent}</p>`;
             index = 0;
             btn.textContent = "Selanjutnya";
-        }
-    });
-
-    // Audio play button
-    const audio = document.getElementById('audio');
-    const playBtn = document.getElementById('playAudioBtn');
-
-    playBtn.addEventListener('click', () => {
-        if (audio.paused) {
-            audio.muted = false;  // buka mute saat user klik play
-            audio.play();
-            playBtn.style.display = 'none'; // sembunyikan tombol setelah play
         }
     });
 </script>
