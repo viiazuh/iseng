@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Anniversary</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ff9a9e, #fecfef);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    .container {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        max-width: 800px;
+        text-align: center;
+        color: white;
+    }
+    p {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 10px;
+        border-radius: 10px;
+        margin: 10px 0;
+    }
+    p.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    button {
+        background: #ff2d95;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 15px;
+        cursor: pointer;
+        border-radius: 10px;
+        font-size: 16px;
+    }
+    button:hover {
+        background: #e02682;
+    }
+    #playAudioBtn {
+        display: inline-block;
+        margin-top: 20px;
+        background: #3b82f6;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Happy Anniversary Sayang ❤️</h2>
+
+    <div id="paragraf-container">
+        <p class="show">Selamat malam buat wanita yang tercantik iyaa itulah pacarkuu, pada tepatnya pukul 12 malam ini adalah hari yg sangat bahagia terutama for me. Iyaa karena hari apa? Yapss bener ini hari jadian kita sayang yg sangat istimewa yg ke 3 tahun😻</p>
+    </div>
+
+    <button id="nextBtn">Selanjutnya</button>
+
+    <audio id="audio" loop muted autoplay>
+        <source src="https://namasitus.netlify.app/Iqbaal%20Ramadhan%20-%20Rindu%20Sendiri%20(Lirik%20Video)%20[lFXlQiS_Mjg].mp3" type="audio/mpeg" />
+    </audio>
+
+    <button id="playAudioBtn">Mainkan Lagu</button>
+</div>
+
+<script>
+    const teks = [
+        "Bukan mudah membangun sudah banyak masalah kita lalui bersama bangga banget abg sama kita melewati berbagai masalah berbagai masalah telah kita lewatin🥹.",
+        "Abg selalu berharap kita gak akan pisah sampai benar-benar takdir yang memisahkan. Maupun suatu saat nanti sejauh apapun jarak kita abg berharap gada rasa sayangnya ayy sedikitpun berkurang buat abg.",
+        "Abg selalu bersyukur dipertemukan sama sosok babby yang sangat hebat yang hanya ada 1 di dunia ini jangan bosen iyaa, jangan capek yaa saying apapun itu rintanganya abg selalu berusaha memperbaiki salah abg yang lalu bahkan saat buat ayy keselpun.",
+        "Selamat untuk kita HAPPYY ANIVERSARY SAYANG🥳🥳 sayang banget dah sama sayang🥹❤💗 SAYANG BANGET POKOKNYA I LOVE YOU BABY❤💗💗❤❤❤"
+    ];
+
+    let index = 0;
+    const container = document.getElementById("paragraf-container");
+    const btn = document.getElementById("nextBtn");
+
+    btn.addEventListener("click", () => {
+        if (index < teks.length) {
+            const p = document.createElement("p");
+            p.textContent = teks[index];
+            container.appendChild(p);
+            setTimeout(() => p.classList.add("show"), 10);
+            index++;
+            if (index === teks.length) {
+                btn.textContent = "Ulangi dari Awal";
+            }
+        } else {
+            // Reset ke paragraf awal saja
+            container.innerHTML = `<p class="show">${container.querySelector('p').textContent}</p>`;
+            index = 0;
+            btn.textContent = "Selanjutnya";
+        }
+    });
+
+    // Audio play button
+    const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('playAudioBtn');
+
+    playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.muted = false;  // buka mute saat user klik play
+            audio.play();
+            playBtn.style.display = 'none'; // sembunyikan tombol setelah play
+        }
+    });
+</script>
+
+</body>
+</html>
